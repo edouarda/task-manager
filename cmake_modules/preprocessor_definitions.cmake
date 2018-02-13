@@ -1,0 +1,75 @@
+add_compile_options(
+    -DGTEST_LANG_CXX11=1
+    -DBOOST_RESULT_OF_USE_DECLTYPE
+    -DBOOST_SPIRIT_USE_PHOENIX_V3
+
+    -DBOOST_MOVE_USE_STANDARD_LIBRARY_MOVE=1
+
+    -DBOOST_ASIO_NO_THROW=1
+    -DBOOST_ASIO_HAS_MOVE=1
+
+    -DBOOST_THREAD_DONT_PROVIDE_DEPRECATED_FEATURES_SINCE_V3_0_0=1
+
+    -DSODIUM_STATIC=1
+
+    $<$<NOT:$<CONFIG:Debug>>:-DNDEBUG>
+    $<$<CONFIG:Debug>:-DDEBUG=1>
+    $<$<CONFIG:Debug>:-D_DEBUG=1>
+)
+
+if(MSVC)
+    add_definitions(
+        /DBOOST_ALL_NO_LIB
+
+        /D__TBB_NO_IMPLICIT_LINKAGE=1
+        /D__TBBMALLOC_NO_IMPLICIT_LINKAGE=1
+
+        /D_WINDOWS
+        /DWIN32
+        /DWIN32_LEAN_AND_MEAN
+        /DVC_EXTRALEAN
+
+        /DWINVER=0x0600
+        /D_WIN32_WINNT=0x0600
+        /DNTDDI_VERSION=0x06000000
+        /DBOOST_USE_WINAPI_VERSION=0x0600
+
+        /DPSAPI_VERSION=1
+        /DNOMINMAX=1
+        /D_CRT_SECURE_NO_WARNINGS
+        /D_SCL_SECURE_NO_WARNINGS
+        /D_SECURE_SCL=$<CONFIG:Debug>
+        /D_HAS_ITERATOR_DEBUGGING=$<CONFIG:Debug>
+
+        /D_HAS_AUTO_PTR_ETC=1 # Boost 1.65.1 does not support this.
+        /D_SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING=1
+        /D_SILENCE_CXX17_ITERATOR_BASE_CLASS_DEPRECATION_WARNING=1
+        /D_SILENCE_CXX17_OLD_ALLOCATOR_MEMBERS_DEPRECATION_WARNING=1
+        /D_SILENCE_CXX17_UNCAUGHT_EXCEPTION_DEPRECATION_WARNING=1
+    )
+    if (NOT ${MSVC_VERSION} VERSION_LESS 1912)
+        # Boost 1.66 is not warning clean.
+        add_definitions(
+            -D_SILENCE_CXX17_RESULT_OF_DEPRECATION_WARNING
+        )
+    endif()
+    if (${MSVC_VERSION} VERSION_LESS 1910)
+        add_definitions(
+            /D_ENABLE_ATOMIC_ALIGNMENT_FIX
+        )
+    endif()
+endif()
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    add_compile_options(
+        -DPIC
+    )
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+    add_compile_options(
+        -DPIC
+        $<$<CONFIG:Debug>:-D_GLIBCXX_DEBUG=1>
+        -DBOOST_NO_AUTO_PTR
+    )
+endif()

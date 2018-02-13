@@ -1,0 +1,206 @@
+---
+# Checks: '*'  # turn on all the checks
+# Turn off some checks by prefixing with '-'
+Checks: '
+    ,*,
+    ,-android-*,
+    ,-cert-dcl03-c,
+    ,-cert-err58-cpp,
+    ,-cert-err60-cpp,
+    ,-cert-err61-cpp,
+    ,-clang-analyzer-alpha.core.CastToStruct,
+    ,-clang-analyzer-alpha.core.PointerArithm,
+    ,-clang-analyzer*,
+    ,clang-analyzer-alpha.core.SizeofPtr,
+    ,-cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+    ,-cppcoreguidelines-pro-bounds-constant-array-index,
+    ,-cppcoreguidelines-pro-bounds-pointer-arithmetic,
+    ,-cppcoreguidelines-pro-type-member-init,
+    ,-cppcoreguidelines-pro-type-union-access,
+    ,-cppcoreguidelines-pro-type-vararg,
+    ,-google-explicit-constructor,
+    ,-google-readability-braces-around-statements,
+    ,-google-readability-function-size,
+    ,-google-readability-redundant-smartptr-get,
+    ,-google-runtime-references,
+    ,-llvm-include-order,
+    ,-misc-argument-comment,
+    ,-misc-static-assert,
+    ,-misc-unused-parameters,
+    ,-modernize-use-nullptr,
+    ,-readability-implicit-bool-cast,
+    '
+WarningsAsErrors: '
+    ,-*,
+    ,cert-err34-c,
+    ,cert-msc30-c,
+    ,cert-msc50-cpp,
+    ,-cppcoreguidelines-interfaces-global-init,
+    ,cppcoreguidelines-no-malloc,
+    ,google-build-using-namespace,
+    ,google-readability-namespace-comments,
+    ,google-runtime-int,
+    ,hicpp-explicit-conversions,
+    ,hicpp-special-member-functions,
+    ,hicpp-use-equals-default,
+    ,hicpp-use-override,
+    ,misc-misplaced-widening-cast,
+    ,misc-move-constructor-init,
+    ,misc-redundant-expression,
+    ,misc-sizeof-expression,
+    ,misc-unused-alias-decls,
+    ,misc-unused-using-decls,
+    ,misc-use-after-move,
+    ,modernize-deprecated-headers,
+    ,modernize-loop-convert,
+    ,modernize-make-unique,
+    ,modernize-raw-string-literal,
+    ,modernize-redundant-void-arg,
+    ,modernize-use-auto,
+    ,-modernize-use-bool-literals,
+    ,modernize-use-emplace,
+    ,modernize-use-equals-default,
+    ,modernize-use-equals-delete,
+    ,performance-faster-string-find,
+    ,performance-for-range-copy,
+    ,performance-unnecessary-value-param,
+    ,readability-braces-around-statements,
+    ,readability-container-size-empty,
+    ,readability-else-after-return,
+    ,readability-function-size,
+    ,readability-inconsistent-declaration-parameter-name,
+    ,readability-named-parameter,
+    ,readability-non-const-parameter,
+    ,readability-redundant-declaration,
+    ,readability-redundant-inconsistent-declaration-parameter-name,
+    ,readability-redundant-string-cstr,
+    ,readability-redundant-string-init,
+    '
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false
+CheckOptions:
+  - key:             google-readability-namespace-comments.ShortNamespaceLines
+    value:           '10'
+  - key:             google-readability-namespace-comments.SpacesBeforeComments
+    value:           '1'
+  - key:             llvm-namespace-comment.ShortNamespaceLines
+    value:           '1'
+  - key:             llvm-namespace-comment.SpacesBeforeComments
+    value:           '1'
+  - key:             misc-assert-side-effect.AssertMacros
+    value:           assert
+  - key:             misc-assert-side-effect.CheckFunctionCalls
+    value:           '0'
+  - key:             readability-braces-around-statements.ShortStatementLines
+    value:           '1'
+  - key:             readability-function-size.BranchThreshold
+    value:           '60'
+  - key:             readability-function-size.LineThreshold
+    value:           '1500'
+  - key:             readability-function-size.StatementThreshold
+    value:           '1000'
+  - key:             readability-simplify-boolean-expr.ChainedConditionalAssignment
+    value:           '0'
+  - key:             readability-simplify-boolean-expr.ChainedConditionalReturn
+    value:           '0'
+  - key:             readability-identifier-naming.AbstractClassCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ClassCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ClassConstantCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ClassConstantPrefix
+    value:           ''
+  - key:             readability-identifier-naming.ClassConstantSuffix
+    value:           ''
+  - key:             readability-identifier-naming.ClassMemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ClassMemberPrefix
+    value:           '_'
+  - key:             readability-identifier-naming.ClassMethodCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ConstantCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ConstantMemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ConstantMemberPrefix
+    value:           '_'
+  - key:             readability-identifier-naming.ConstantParameterCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ConstexprFunctionCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ConstexprMethodCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ConstexprVariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.EnumCase
+    value:           lower_case
+  - key:             readability-identifier-naming.EnumConstantCase
+    value:           lower_case
+  - key:             readability-identifier-naming.FunctionCase
+    value:           lower_case
+  - key:             readability-identifier-naming.GlobalConstantCase
+    value:           lower_case
+  - key:             readability-identifier-naming.GlobalFunctionCase
+    value:           lower_case
+  - key:             readability-identifier-naming.GlobalVariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.GlobalVariablePrefix
+    value:           '__'
+  - key:             readability-identifier-naming.InlineNamespaceCase
+    value:           lower_case
+  - key:             readability-identifier-naming.LocalConstantCase
+    value:           lower_case
+  - key:             readability-identifier-naming.LocalVariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.MemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.MemberPrefix
+    value:           '_'
+  - key:             readability-identifier-naming.MethodCase
+    value:           lower_case
+  - key:             readability-identifier-naming.NamespaceCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ParameterCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ParameterPackCase
+    value:           lower_case
+  - key:             readability-identifier-naming.PrivateMemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.PrivateMemberPrefix
+    value:           '_'
+  - key:             readability-identifier-naming.PrivateMethodCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ProtectedMemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ProtectedMemberPrefix
+    value:           '_'
+  - key:             readability-identifier-naming.ProtectedMethodCase
+    value:           lower_case
+  - key:             readability-identifier-naming.PublicMemberCase
+    value:           lower_case
+  - key:             readability-identifier-naming.PublicMethodCase
+    value:           lower_case
+  - key:             readability-identifier-naming.StaticConstantCase
+    value:           lower_case
+  - key:             readability-identifier-naming.StaticVariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.StructCase
+    value:           lower_case
+  - key:             readability-identifier-naming.TemplateParameterCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.TemplateTemplateParameterCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.TypeTemplateParameterCase
+    value:           CamelCase
+#  - key:             readability-identifier-naming.TypedefCase
+#    value:           lower_case
+  - key:             readability-identifier-naming.UnionCase
+    value:           lower_case
+  - key:             readability-identifier-naming.ValueTemplateParameterCase
+    value:           CamelCase
+  - key:             readability-identifier-naming.VariableCase
+    value:           lower_case
+  - key:             readability-identifier-naming.VirtualMethodCase
+    value:           lower_case
+...

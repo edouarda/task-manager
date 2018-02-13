@@ -1,0 +1,22 @@
+include(CMakeParseArguments)
+
+macro(add_link_options)
+    set(options OPTIONAL WITH_STATIC)
+    set(oneValueArgs CONFIGURATION)
+    set(multiValueArgs OPTIONS)
+    cmake_parse_arguments(ALO "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    set(CONFIGURATION_SUFFIX "")
+    if(NOT ${ALO_CONFIGURATION} STREQUAL "")
+        string(TOUPPER "_${ALO_CONFIGURATION}" CONFIGURATION_SUFFIX)
+    endif()
+
+    foreach(OPTION ${ALO_OPTIONS} ${ALO_UNPARSED_ARGUMENTS})
+        set(CMAKE_EXE_LINKER_FLAGS${CONFIGURATION_SUFFIX}    "${CMAKE_EXE_LINKER_FLAGS${CONFIGURATION_SUFFIX}}    ${OPTION}")
+        set(CMAKE_MODULE_LINKER_FLAGS${CONFIGURATION_SUFFIX} "${CMAKE_MODULE_LINKER_FLAGS${CONFIGURATION_SUFFIX}} ${OPTION}")
+        set(CMAKE_SHARED_LINKER_FLAGS${CONFIGURATION_SUFFIX} "${CMAKE_SHARED_LINKER_FLAGS${CONFIGURATION_SUFFIX}} ${OPTION}")
+        if(ALO_WITH_STATIC)
+            set(CMAKE_STATIC_LINKER_FLAGS${CONFIGURATION_SUFFIX} "${CMAKE_STATIC_LINKER_FLAGS${CONFIGURATION_SUFFIX}} ${OPTION}")
+        endif()
+    endforeach()
+endmacro()
