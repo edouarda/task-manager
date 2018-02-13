@@ -40,10 +40,10 @@ public:
     }
 
 public:
-    template <typename Function>
-    void run(Function f)
+    template <typename Function, typename... Args>
+    void run(Function && f, Args &&... args)
     {
-        _queue.push(new task{f});
+        _queue.push(new task{std::forward<Function>(f), std::forward<Args>(args)...});
     }
 
 private:

@@ -13,16 +13,13 @@ public:
     using function_type = std::function<void()>;
 
 public:
-    explicit task(function_type e)
-        : _executor{e}
+    template <typename Function, typename... Args>
+    explicit task(Function && f, Args &&... args)
+        : _executor{[cf = std::forward<Function>(f), cargs = std::make_tuple(std::forward<Args>(args)...)] { std::apply(cf, cargs); }}
+
     {
         assert(_executor);
     }
-
-    template <typename Function>
-    task(Function f, void * p)
-        : _executor{[f, p]() { f(p); }}
-    {}
 
 public:
     void run()
