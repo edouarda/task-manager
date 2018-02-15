@@ -133,6 +133,7 @@ endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX)
     add_compile_options(
+        -std=c++17
         -fdata-sections
         -ffunction-sections
         -fno-stack-protector
